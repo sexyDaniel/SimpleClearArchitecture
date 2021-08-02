@@ -28,6 +28,7 @@ namespace SportStore.WebApi
             services.AddControllers();
             services.AddAplication();
             services.AddPersistence(Configuration);
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,6 +38,12 @@ namespace SportStore.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(config=> 
+            {
+                config.RoutePrefix = string.Empty;
+                config.SwaggerEndpoint("swagger/v1/swagger.json", "SportStore WebApi");
+            });
             app.UseRouting();
             app.UseHttpsRedirection();
 
